@@ -9,11 +9,5 @@ import { authCodeFlowConfig } from './app.module';
 })
 export class AppComponent {
   title = 'argon-dashboard-angular';
-  
-  constructor(private oauthService: OAuthService ){
-    this.oauthService.configure(authCodeFlowConfig);
-    this.oauthService.initCodeFlow();
-    // this.oauthService.loadDiscoveryDocumentAndTryLogin();
-  }
 
 }
