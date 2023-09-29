@@ -7,6 +7,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginComponent } from '../../pages/login/login.component';
 import { RegisterComponent } from '../../pages/register/register.component';
+import { LogoutComponent } from 'src/app/pages/logout/logout.component';
+import { AuthGuard } from 'src/app/core/auth-guard';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +18,9 @@ import { RegisterComponent } from '../../pages/register/register.component';
   ],
   declarations: [
     LoginComponent,
+    LogoutComponent,
     RegisterComponent
-  ]
+  ],
+  providers: []
 })
 export class AuthLayoutModule { }

@@ -1,8 +1,9 @@
+import { CanActivateFn } from "@angular/router";
 import { UserManager, UserManagerSettings } from "oidc-client";
 
 export const config: UserManagerSettings = {
     authority: "https://localhost:5001",
-    client_id: "spa",
+    client_id: "interactive",
     // redirect_uri: "https://localhost:5003/callback.html",
     redirect_uri: "http://localhost:4200/#/dashboard",
     response_type: "code",

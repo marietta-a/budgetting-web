@@ -1,6 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { authCodeFlowConfig } from 'src/app/app.module';
 import {User, UserManager, UserManagerSettings} from 'oidc-client';
 import { config, mgr } from 'src/app/core/auth-config';
 
@@ -28,9 +26,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       });
   }
   constructor(){
-      console.log(config)
-     
-      console.log(mgr);
       mgr.getUser().then(function (user) {
         if (user) {
             this.log("User logged in", user.profile);
@@ -41,9 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // document.getElementById("login").addEventListener("click", this.login, false);
-    // document.getElementById("api").addEventListener("click", this.api, false);
-    // document.getElementById("logout").addEventListener("click", this.logout, false);
+    
   }
   ngOnDestroy() {
   }
@@ -51,6 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   login() {
       console.log(mgr);
       mgr.signinRedirect();
+      
   }
 
   api() {

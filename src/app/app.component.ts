@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { authCodeFlowConfig } from './app.module';
 
 @Component({
   selector: 'app-root',
