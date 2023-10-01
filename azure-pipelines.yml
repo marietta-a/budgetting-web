@@ -1,0 +1,45 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+variables:
+  buildConfiguration: 'Release'
+
+pool:
+  name: Default
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSource: 'spec'
+    versionSpec: '18.17.1'
+  displayName: 'Install Node 18.17.1'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'npm install -g @angular/cli@16.2.1'
+  displayName: 'install angular cli@16.2.1'
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: 'src/'
+  displayName: 'npm install'
+
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: 'src/'
+    customCommand: run build --prod
+  displayName: 'build angular app'
+  
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'budgetting-app'
+    targetPath: 'src/dist'
+
+
+
