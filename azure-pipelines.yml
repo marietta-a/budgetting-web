@@ -4,16 +4,42 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+- '*'
+
+variables:
+  buildConfiguration: 'Release'
 
 pool:
-  vmImage: ubuntu-latest
+  name: Default
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: NodeTool@0
+  inputs:
+    versionSource: 'spec'
+    versionSpec: '18.17.1'
+  displayName: 'Install Node 18.17.1'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'npm install -g @angular/cli@16.2.1'
+  displayName: 'install angular cli@16.2.1'
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: 'src/'
+  displayName: 'npm install'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: 'src/'
+    customCommand: run build --prod
+  displayName: 'build angular app'
+  
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'budgetting-app'
+    targetPath: 'src/dist'
+
+
+
