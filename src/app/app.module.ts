@@ -16,6 +16,7 @@ import { AuthConfig, OAuthModule } from 'angular-oauth2-oidc';
 import { AuthGuard } from './core/auth-guard';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Route, RouterStateSnapshot } from "@angular/router";
 import { AuthService } from './core/auth-service';
+import { UserManagementComponent } from './pages/user-management/user-management.component';
 
 @NgModule({
   imports: [

@@ -11,6 +11,17 @@ import { config, mgr } from 'src/app/core/auth-config';
 export class LoginComponent implements OnInit, OnDestroy {
 
   mgr: UserManager;
+  
+  constructor(){
+    mgr.getUser().then(function (user) {
+      if (user) {
+          this.log("User logged in", user.profile);
+      }
+      else {
+          console.log("User not logged in");
+      }});
+    }
+
   log() {
       document.getElementById('results').innerText = '';
       console.log(`id ${document.getElementById('results')}`);
@@ -25,16 +36,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           document.getElementById('results').innerHTML += msg + '\r\n';
       });
   }
-  constructor(){
-      mgr.getUser().then(function (user) {
-        if (user) {
-            this.log("User logged in", user.profile);
-        }
-        else {
-            console.log("User not logged in");
-        }});
-  }
-
   ngOnInit() {
     
   }
