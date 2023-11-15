@@ -17,6 +17,8 @@ import { AuthGuard } from './core/auth-guard';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Route, RouterStateSnapshot } from "@angular/router";
 import { AuthService } from './core/auth-service';
 import { UserManagementComponent } from './pages/user-management/user-management.component';
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from './core/reducers/user.reducer';
 
 @NgModule({
   imports: [
@@ -27,7 +29,8 @@ import { UserManagementComponent } from './pages/user-management/user-management
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    OAuthModule.forRoot()
+    OAuthModule.forRoot(),
+    StoreModule.forRoot({user: userReducer})
   ],
   declarations: [
     AppComponent,

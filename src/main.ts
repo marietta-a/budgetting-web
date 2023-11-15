@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { AppComponent } from './app/app.component';
+import { provideStore } from '@ngrx/store';
 
 if (environment.production) {
   enableProdMode();
@@ -34,7 +35,8 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
   bootstrapApplication(AppComponent, {
     providers: [
-      importProvidersFrom(HttpClientModule),
-      provideOAuthClient()
-    ]
+    importProvidersFrom(HttpClientModule),
+    provideOAuthClient(),
+    provideStore()
+]
   });
