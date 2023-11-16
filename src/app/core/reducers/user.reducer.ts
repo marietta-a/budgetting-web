@@ -10,19 +10,21 @@ export interface UserState extends EntityState<User> {
 
 export function selectUserId(a: User): string {
   //In this case this would be optional since primary key is id
-  return a.id;
+  return a.Id;
 }
 
 export function sortByName(a: User, b: User): number {
-  return a.userName.localeCompare(b.userName);
+  return a.UserName.localeCompare(b.UserName);
 }
 
-export const adapter: EntityAdapter<User> = createEntityAdapter<User>({
+export const userAdapter: EntityAdapter<User> = createEntityAdapter<User>({
   selectId: selectUserId,
   sortComparer: sortByName,
 });
 
-export const initialState: UserState = adapter.getInitialState({
+export const userSelectors = userAdapter.getSelectors<UserState>((user) => user);
+
+export const initialState: UserState = userAdapter.getInitialState({
     // additional entity state properties
     selectedUserId: null,
   });
@@ -30,49 +32,49 @@ export const initialState: UserState = adapter.getInitialState({
   export const userReducer = createReducer(
     initialState,
     on(UserActions.addUser, (state, { user }) => {
-      return adapter.addOne(user, state)
+      return userAdapter.addOne(user, state)
     }),
     on(UserActions.setUser, (state, { user }) => {
-      return adapter.setOne(user, state)
+      return userAdapter.setOne(user, state)
     }),
     on(UserActions.upsertUser, (state, { user }) => {
-      return adapter.upsertOne(user, state);
+      return userAdapter.upsertOne(user, state);
     }),
     on(UserActions.addUsers, (state, { users }) => {
-      return adapter.addMany(users, state);
+      return userAdapter.addMany(users, state);
     }),
     on(UserActions.upsertUsers, (state, { users }) => {
-      return adapter.upsertMany(users, state);
+      return userAdapter.upsertMany(users, state);
     }),
     on(UserActions.updateUser, (state, { update }) => {
-      return adapter.updateOne(update, state);
+      return userAdapter.updateOne(update, state);
     }),
     on(UserActions.updateUsers, (state, { updates }) => {
-      return adapter.updateMany(updates, state);
+      return userAdapter.updateMany(updates, state);
     }),
     on(UserActions.mapUser, (state, { entityMap }) => {
-      return adapter.mapOne(entityMap, state);
+      return userAdapter.mapOne(entityMap, state);
     }),
     on(UserActions.mapUsers, (state, { entityMap }) => {
-      return adapter.map(entityMap, state);
+      return userAdapter.map(entityMap, state);
     }),
     on(UserActions.deleteUser, (state, { id }) => {
-      return adapter.removeOne(id, state);
+      return userAdapter.removeOne(id, state);
     }),
     on(UserActions.deleteUsers, (state, { ids }) => {
-      return adapter.removeMany(ids, state);
+      return userAdapter.removeMany(ids, state);
     }),
     on(UserActions.deleteUsersByPredicate, (state, { predicate }) => {
-      return adapter.removeMany(predicate, state);
+      return userAdapter.removeMany(predicate, state);
     }),
     on(UserActions.loadUsers, (state, { users }) => {
-      return adapter.setAll(users, state);
+      return userAdapter.setAll(users, state);
     }),
     on(UserActions.setUsers, (state, { users }) => {
-      return adapter.setMany(users, state);
+      return userAdapter.setMany(users, state);
     }),
     on(UserActions.clearUsers, state => {
-      return adapter.removeAll({ ...state, selectedUserId: null });
+      return userAdapter.removeAll({ ...state, selectedUserId: null });
     })
   );
    
@@ -85,7 +87,7 @@ export const initialState: UserState = adapter.getInitialState({
     selectEntities,
     selectAll,
     selectTotal,
-  } = adapter.getSelectors();
+  } = userAdapter.getSelectors();
    
   // select the array of user ids
   export const selectUserIds = selectIds;

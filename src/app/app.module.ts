@@ -19,6 +19,7 @@ import { AuthService } from './core/auth-service';
 import { UserManagementComponent } from './pages/user-management/user-management.component';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './core/reducers/user.reducer';
+import { UserManagementService } from './core/services/user.service';
 
 @NgModule({
   imports: [
@@ -37,7 +38,10 @@ import { userReducer } from './core/reducers/user.reducer';
     AdminLayoutComponent,
     AuthLayoutComponent
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService, 
+    UserManagementService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

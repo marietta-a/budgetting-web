@@ -2,9 +2,9 @@ import { createAction, props } from '@ngrx/store';
 import { Update, EntityMap, EntityMapOne, Predicate } from '@ngrx/entity';
 import { User } from '../models/user';
 
-export const loadUsers = createAction('[User/API] Load Users', props<{ users: User[] }>());
+export const loadUsers = createAction('Load Users', props<{ users: User[] }>());
 export const setUsers = createAction('[User/API] Set Users', props<{ users: User[] }>());
-export const addUser = createAction('[User/API] Add User', props<{ user: User }>());
+export const addUser = createAction('Add User', props<{ user: User }>());
 export const setUser = createAction('[User/API] Set User', props<{ user: User }>());
 export const upsertUser = createAction('[User/API] Upsert User', props<{ user: User }>());
 export const addUsers = createAction('[User/API] Add Users', props<{ users: User[] }>());

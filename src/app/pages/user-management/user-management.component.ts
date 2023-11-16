@@ -1,55 +1,57 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store, props } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/core/models/user';
 import * as UserActions from '../../core/actions/user.actions';
 import { mgr } from 'src/app/core/auth-config';
+import { UserManagementService } from 'src/app/core/services/user.service';
+import { selectUserCollection, selectUsers } from 'src/app/core/selectors/user.selectors';
 
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.scss']
 })
-export class UserManagementComponent {
+export class UserManagementComponent implements OnInit, OnDestroy {
    user: User = {
-     id: '',
-     email: '',
-     firstName: '',
-     lastName: '',
-     userName: '',
-     password: ''
+     Id: '',
+     Email: '',
+     FirstName: '',
+     LastName: '',
+     UserName: '',
+     Password: ''
    }
-   urlBase: string = "https://localhost:6001/api";
-   http: HttpClient;
 
-   constructor(private store: Store<{user: User}>, httpClient: HttpClient){
-      this.http = httpClient;
-      store.select('user').subscribe((response: User) => {
-          this.user = response;
-      })
-      mgr.getUser().then(function(u) {
+   users$ = this.store.select(selectUsers);
+   
+   userCollection$ = this.store.select(selectUserCollection);
 
-        console.log(`user management logged in user details: ${u}`)
-      })
+   constructor(private store: Store<User>, private userService: UserManagementService){
+  
    }
+
+  ngOnDestroy(): void {
+      
+  }
+  ngOnInit(): void {    
+      this.userService.getUsers().subscribe(users => {
+           this.store.dispatch(UserActions.addUsers({users}));
+           this.users$.subscribe(users => {
+               console.log(users);
+           })
+      })
+  }
+
 
   createUser(){
-    try{
-      console.log('creating user \n');
-        this.store.dispatch(UserActions.addUser({user: this.user}))
-    }
-    catch(e){
-      console.log(`creating user error: ${e}`);
-    }
-    // let fd = new FormData();
-    // console.log(this.user)
-    // var user = JSON.stringify(this.user);
-    // fd.append("user", user);
-    // let url = this.urlBase + '/User/CreateUser';
-    // this.http.post(url, user);
-    // console.log(url);
-    // console.log(user)
+     this.userService.createUser(this.user).subscribe(user => {
+       if(user){
+         this.store.dispatch(UserActions.addUser({user}));
+         console.log(this.user)
+         console.log(this.users$);
+       }
+
+     })
   }
 
 }
