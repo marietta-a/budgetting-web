@@ -36,9 +36,6 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   ngOnInit(): void {    
       this.userService.getUsers().subscribe(users => {
            this.store.dispatch(UserActions.addUsers({users}));
-           this.users$.subscribe(users => {
-               console.log(users);
-           })
       })
   }
 
@@ -48,7 +45,6 @@ export class UserManagementComponent implements OnInit, OnDestroy {
        if(user){
          this.store.dispatch(UserActions.addUser({user}));
          console.log(this.user)
-         console.log(this.users$);
        }
 
      })
