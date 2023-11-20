@@ -8,6 +8,6 @@ export const selectUserCollection = createSelector(
     selectUsers,
     selectCollection,
     (users, collection) => {
-        return collection.map((id) => users.find(u => u.Id === id)!)
+        return collection.map((id) => users.find(u => u.id === id)!)
     }
 )

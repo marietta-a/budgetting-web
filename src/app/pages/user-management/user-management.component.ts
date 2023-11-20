@@ -6,6 +6,8 @@ import * as UserActions from '../../core/actions/user.actions';
 import { mgr } from 'src/app/core/auth-config';
 import { UserManagementService } from 'src/app/core/services/user.service';
 import { selectUserCollection, selectUsers } from 'src/app/core/selectors/user.selectors';
+import { UserState } from 'src/app/core/reducers/user.reducer';
+import { Dictionary } from '@ngrx/entity';
 
 @Component({
   selector: 'app-user-management',
@@ -14,29 +16,34 @@ import { selectUserCollection, selectUsers } from 'src/app/core/selectors/user.s
 })
 export class UserManagementComponent implements OnInit, OnDestroy {
    user: User = {
-     Id: '',
-     Email: '',
-     FirstName: '',
-     LastName: '',
-     UserName: '',
-     Password: ''
+     id: '',
+     email: '',
+     firstName: '',
+     lastName: '',
+     userName: '',
+     password: ''
    }
 
-   users$ = this.store.select(selectUsers);
+  //  users$ = this.store.select(selectUsers);
+  users$: Dictionary<User>;
    
    userCollection$ = this.store.select(selectUserCollection);
 
-   constructor(private store: Store<User>, private userService: UserManagementService){
-  
+   constructor(private store: Store<any>, private userService: UserManagementService){
+    
    }
 
   ngOnDestroy(): void {
       
   }
-  ngOnInit(): void {    
-      this.userService.getUsers().subscribe(users => {
-           this.store.dispatch(UserActions.addUsers({users}));
+  async ngOnInit(): Promise<void> { 
+    await this.userService.getUsers().subscribe((response: any) => {
+      this.store.dispatch(UserActions.setUsers({users: response.result}));
+      this.store.select('user').subscribe(user => {
+          this.users$ = user.entities;
+          console.log(this.users$)
       })
+    })
   }
 
 
