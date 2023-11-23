@@ -7,7 +7,8 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  # vmImage: ubuntu-latest
+  name: GitHub-Codespaces
 
 steps:
 - task: NodeTool@0
