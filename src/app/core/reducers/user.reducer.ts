@@ -6,28 +6,32 @@ import * as UserActions from '../actions/user.actions';
 export interface UserState extends EntityState<User> {
   // additional entities state properties
   selectedUserId: string | null;
+  loading: boolean | null;
 }
 
-export function selectUserId(a: User): string {
+function selectUserId(a: User): string {
   //In this case this would be optional since primary key is id
-  return a.Id;
+  return a.id;
 }
 
-export function sortByName(a: User, b: User): number {
-  return a.UserName.localeCompare(b.UserName);
+function sortByName(a: User, b: User): number {
+  return a.userName.localeCompare(b.userName);
 }
 
-export const userAdapter: EntityAdapter<User> = createEntityAdapter<User>({
-  selectId: selectUserId,
-  sortComparer: sortByName,
+const userAdapter: EntityAdapter<User> = createEntityAdapter<User>({
+   sortComparer: (a, b) => sortByName(a, b)
 });
+
+
 
 export const userSelectors = userAdapter.getSelectors<UserState>((user) => user);
 
 export const initialState: UserState = userAdapter.getInitialState({
-    // additional entity state properties
-    selectedUserId: null,
+      loading: true,
+      selectedUserId: null
   });
+
+  
    
   export const userReducer = createReducer(
     initialState,
