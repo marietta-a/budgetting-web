@@ -18,8 +18,7 @@ variables:
 
   # Agent VM image name 
   # vmImageName: 'ubuntu-latest' 
-  # vmImageName: 'GitHub-Codespaces'
-  vmImageName: 'Azure Pipelines'
+  vmImageName: 'GitHub-Codespaces'
 
 stages:
 - stage: Build
