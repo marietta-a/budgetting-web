@@ -17,8 +17,9 @@ variables:
   tag: '$(Build.BuildId)'
 
   # Agent VM image name 
-  # vmImageName: 'ubuntu-latest'
-  vmImageName: 'GitHub-Codespaces'
+  # vmImageName: 'ubuntu-latest' 
+  # vmImageName: 'GitHub-Codespaces'
+  vmImageName: 'Azure Pipelines'
 
 stages:
 - stage: Build
