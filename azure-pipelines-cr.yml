@@ -46,7 +46,8 @@ stages:
       displayName: Start docker
       inputs:
         targetType: inline
-        script: sudo service docker restart
+        script: " wsl --update
+        sudo service docker restart"
 
     - task: Docker@2
       displayName: Build and push an image to container registry
