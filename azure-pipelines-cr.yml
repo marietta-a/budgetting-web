@@ -43,11 +43,16 @@ stages:
         releaseType: stable
 
     - task: Bash@3
+      displayName: enable wsl
+      inputs:
+        targetType: inline
+        script: wsl --update
+
+    - task: Bash@3
       displayName: Start docker
       inputs:
         targetType: inline
-        script: " wsl --update
-        sudo service docker restart"
+        script:  sudo service docker restart
 
     - task: Docker@2
       displayName: Build and push an image to container registry
