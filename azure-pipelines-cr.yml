@@ -41,13 +41,7 @@ stages:
       inputs:
         dockerVersion: 17.09.0-ce
         releaseType: stable
-
-    - task: Bash@3
-      displayName: enable wsl
-      inputs:
-        targetType: inline
-        script: wsl --update
-
+        
     - task: Bash@3
       displayName: Start docker
       inputs:
