@@ -30,24 +30,12 @@ stages:
      name: $(vmImageName)
       # vmImage: $(vmImageName)
     steps:
-    - task: Bash@3
-      displayName: List files
-      inputs:
-        targetType: inline
-        script: ls $(Build.SourcesDirectory)
-
-    - task: DockerInstaller@0
-      displayName: Docker Installer
-      inputs:
-        dockerVersion: 17.09.0-ce
-        releaseType: stable
+    # - task: DockerInstaller@0
+    #   displayName: Docker Installer
+    #   inputs:
+    #     dockerVersion: 17.09.0-ce
+    #     releaseType: stable
         
-    - task: Bash@3
-      displayName: Start docker
-      inputs:
-        targetType: inline
-        script:  sudo service docker restart
-
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
