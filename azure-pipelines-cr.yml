@@ -16,7 +16,7 @@ variables:
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
   ## Add this under variables section in the pipeline
-  azureSubscription: 'fed1d222-2e78-480b-ac7b-e87be0b17eeb'
+  azureSubscription: 'Azure subscription 1'
   appName: 'maanjong-cosmetics'
   resourceGroupName: 'my-resources'
 
@@ -51,14 +51,14 @@ stages:
         azureSubscription: $(azureSubscription)
         appName: $(appName)
         containers: $(containerRegistry)/$(imageRepository):$(tag)
-        deployToSlotOrASE: true
-        resourceGroupName: 4(resourceGroupName)
-        slotName: staging
+    #     deployToSlotOrASE: true
+    #     resourceGroupName: 4(resourceGroupName)
+    #     slotName: staging
 
-    - task: AzureAppServiceManage@0
-      inputs:
-        azureSubscription: $(azureSubscription)
-        WebAppName: $(appName)
-        ResourceGroupName: $(resourceGroupName)
-        SourceSlot: staging
-        SwapWithProduction: true
+    # - task: AzureAppServiceManage@0
+    #   inputs:
+    #     azureSubscription: $(azureSubscription)
+    #     WebAppName: $(appName)
+    #     ResourceGroupName: $(resourceGroupName)
+    #     SourceSlot: staging
+    #     SwapWithProduction: true
