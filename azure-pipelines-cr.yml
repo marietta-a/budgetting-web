@@ -47,8 +47,9 @@ stages:
     ## Add the below snippet at the end of your pipeline
     - task: AzureWebAppContainer@1
       inputs:
-        azureSubscription: 'Azure subscription 1(fed1d222-2e78-480b-ac7b-e87be0b17eeb)'
+        azureSubscription: 'Azure subscription 1(1)(fed1d222-2e78-480b-ac7b-e87be0b17eeb)'
         appName: 'maanjong-cosmetics'
         deployToSlotOrASE: true
         resourceGroupName: 'my-resources'
         slotName: 'production'
+        containers: 'mcr.microsoft.com/appsvc/staticsite:latest'
