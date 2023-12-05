@@ -40,7 +40,7 @@ stages:
       displayName: Start docker
       inputs:
         targetType: inline
-        script: systemctl start docker
+        script: service --status-all
 
     - task: Docker@2
       displayName: Build and push an image to container registry
