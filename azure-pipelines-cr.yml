@@ -46,19 +46,9 @@ stages:
 
     ## Add the below snippet at the end of your pipeline
     - task: AzureWebAppContainer@1
-      displayName: 'Azure Web App on Container Deploy'
       inputs:
-        azureSubscription: $(azureSubscription)
-        appName: $(appName)
-        containers: $(containerRegistry)/$(imageRepository):$(tag)
-    #     deployToSlotOrASE: true
-    #     resourceGroupName: 4(resourceGroupName)
-    #     slotName: staging
-
-    # - task: AzureAppServiceManage@0
-    #   inputs:
-    #     azureSubscription: $(azureSubscription)
-    #     WebAppName: $(appName)
-    #     ResourceGroupName: $(resourceGroupName)
-    #     SourceSlot: staging
-    #     SwapWithProduction: true
+        azureSubscription: 'Azure subscription 1(fed1d222-2e78-480b-ac7b-e87be0b17eeb)'
+        appName: 'maanjong-cosmetics'
+        deployToSlotOrASE: true
+        resourceGroupName: 'my-resources'
+        slotName: 'production'
