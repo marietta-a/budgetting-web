@@ -50,7 +50,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository):latest
+        repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -65,4 +65,4 @@ stages:
         resourceGroupName: 'my-resources'
         slotName: 'production'
         # containers: 'mcr.microsoft.com/appsvc/staticsite:latest'
-        containers: $(containerRegistry)
+        containers: 'budgettingweb.azurecr.io/mariettaabudgettingweb:latest'
