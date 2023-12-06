@@ -38,15 +38,12 @@ stages:
       inputs:
         versionSource: 'spec'
         versionSpec: '10.x'
-    - task: NodeTaskRunnerInstaller@0
-      inputs:
-        nodeVersion: '10'
     - task: Bash@3
       inputs:
         targetType: 'inline'
         script: |
           # Write your commands here
-          npm install -g @angular/cli
+          npm install -g @angular/cli:latest
           npm run build
     - task: Docker@2
       displayName: Build and push an image to container registry
