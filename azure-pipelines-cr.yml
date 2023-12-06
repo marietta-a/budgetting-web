@@ -65,4 +65,4 @@ stages:
         resourceGroupName: 'my-resources'
         slotName: 'production'
         # containers: 'mcr.microsoft.com/appsvc/staticsite:latest'
-        containers: 'budgettingweb.azurecr.io/mariettaabudgettingweb:latest'
+        containers: 'budgettingweb.azurecr.io/mariettaabudgettingweb:109'
