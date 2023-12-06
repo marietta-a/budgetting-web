@@ -43,6 +43,7 @@ stages:
         targetType: 'inline'
         script: |
           # Write your commands here
+          npm install
           npm install -g @angular/cli@latest
           npm run build
     - task: Docker@2
