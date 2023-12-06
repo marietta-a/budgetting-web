@@ -61,9 +61,9 @@ stages:
       inputs:
         azureSubscription: $(azureSubscription)
         appName: $(appName)
-        deployToSlotOrASE: true
         resourceGroupName: 'my-resources'
-        slotName: 'production'
+        containers: 'budgettingweb.azurecr.io/mariettaabudgettingweb:111'
+        # deployToSlotOrASE: true
+        # slotName: 'production'
         # containers: 'mcr.microsoft.com/appsvc/staticsite:latest'
         # containers: $(containerRegistry)
-        containers: $(imageRepository):110
