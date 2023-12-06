@@ -37,7 +37,7 @@ stages:
     - task: NodeTool@0
       inputs:
         versionSource: 'spec'
-        versionSpec: '10.x'
+        versionSpec: 'v18.13'
     - task: Bash@3
       inputs:
         targetType: 'inline'
